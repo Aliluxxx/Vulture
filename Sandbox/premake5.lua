@@ -8,14 +8,15 @@ project "Sandbox"
 
 	files {
 
-		"**.h", "**.cpp", "**.inl",
+		"src/**.h", "src/**.cpp", "src/**.inl",
 		"%{wks.location}/%{prj.name}/resources/**"
 	}
 
 	includedirs {
 
 		"src",
-		"%{wks.location}/Vulture/src"
+		"%{wks.location}/Vulture/src",
+		"%{IncludeDir.spdlog}"
 	}
 
 	links {
