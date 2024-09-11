@@ -21,6 +21,8 @@ project "Vulture"
 
 	-- Windows
 	filter "system:windows"
+		pchheader "vepch.h"
+		pchsource "src/vepch.cpp"
 		defines {
 
 			"VULTURE_PLATFORM_WINDOWS",
@@ -29,6 +31,8 @@ project "Vulture"
 
 	-- Linux
 	filter "system:linux"
+		pchheader "%{wks.location}/%{prj.name}/src/vepch.h"
+		removefiles "src/vepch.cpp"
 		defines {
 
 			"VULTURE_PLATFORM_LINUX"
@@ -36,6 +40,8 @@ project "Vulture"
 
 	-- MacOSX
 	filter "system:macosx"
+		pchheader "%{wks.location}/%{prj.name}/src/vepch.h"
+		removefiles "src/vepch.cpp"
 		defines {
 
 			"VULTURE_PLATFORM_MACOSX"
