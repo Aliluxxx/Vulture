@@ -1,3 +1,5 @@
+#include "vepch.h"
+
 #include "Vulture/Core/Log.h"
 
 #include "spdlog/sinks/stdout_color_sinks.h"
