@@ -30,3 +30,60 @@
 *.exe
 *.out
 *.app
+!build/windows/premake5.exe
+!build/linux/premake5
+!build/macosx/premake5
+
+# Binaries folders
+**/bin/
+**/bin-int/
+
+# Windows files
+**.bat
+!windows-build-vs2022.bat
+!windows-build-gmake.bat
+
+# Link files
+**.lnk
+
+# Visual Studio files
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+
+# Linux files
+**.sh
+!linux-build.sh
+!linux-build-codelite.sh
+!linux-build-gmake.sh
+
+# Codelite files
+Makefile
+**/.build*/
+.codelite/
+**.workspace
+**.mk
+**.project
+**.txt
+
+# MacOSX files
+**.command
+**.sh
+!macosx-build.sh
+!macosx-build-xcode.sh
+!macosx-build-gmake.sh
+
+# Xcode Files
+**.xcworkspace
+**.xcworkspacedata
+**.xcodeproj
+**.pbxproj
+**.DS_Store
+
+# Ini files
+**.ini
+
+# Resources folder
+!*/resources/**
