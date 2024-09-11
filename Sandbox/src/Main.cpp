@@ -1,6 +1,16 @@
-#include <Vulture/Core.h>
+#include <Vulture/Core/Log.h>
 
 int main() {
 
-	print();
+	ve::Log::Init();
+
+	VE_TRACE("Hello World!");
+	VE_DEBUG("Hello World!");
+	VE_INFO("Hello World!");
+	VE_WARN("Hello World!");
+	VE_ERROR("Hello World!");
+	VE_CRITICAL("Hello World!");
+	VE_ASSERT(true, "Hello World!");
+
+	system("pause");
 }
