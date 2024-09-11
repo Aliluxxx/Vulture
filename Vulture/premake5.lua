@@ -7,9 +7,17 @@ project "Vulture"
 
 	files {
 
-		"**.h", "**.cpp", "**.inl",
+		"src/**.h", "src/**.cpp", "src/**.inl",
 		"%{wks.location}/%{prj.name}/resources/**"
 	}
+
+	includedirs {
+
+		"src",
+		"%{IncludeDir.spdlog}"
+	}
+
+	defines "VULTURE_ENGINE"
 
 	-- Windows
 	filter "system:windows"
