@@ -11,6 +11,4 @@ int main() {
 	VE_ERROR("Hello World!");
 	VE_CRITICAL("Hello World!");
 	VE_ASSERT(true, "Hello World!");
-
-	system("pause");
 }
