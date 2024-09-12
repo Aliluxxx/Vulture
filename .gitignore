@@ -40,8 +40,6 @@
 
 # Windows files
 **.bat
-!windows-build-vs2022.bat
-!windows-build-gmake.bat
 
 # Link files
 **.lnk
@@ -55,9 +53,6 @@
 
 # Linux files
 **.sh
-!linux-build.sh
-!linux-build-codelite.sh
-!linux-build-gmake.sh
 
 # Codelite files
 Makefile
@@ -71,9 +66,6 @@ Makefile
 # MacOSX files
 **.command
 **.sh
-!macosx-build.sh
-!macosx-build-xcode.sh
-!macosx-build-gmake.sh
 
 # Xcode Files
 **.xcworkspace
@@ -81,6 +73,10 @@ Makefile
 **.xcodeproj
 **.pbxproj
 **.DS_Store
+
+# Script files
+!**/build*.bat
+!**/build*.sh
 
 # Ini files
 **.ini
