@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 
 #else
 
-int VULTURE_API main() {
+int main() {
 
 	ve::Log::Init();
 
