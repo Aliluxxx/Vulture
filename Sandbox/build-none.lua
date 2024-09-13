@@ -3,11 +3,6 @@ project "Sandbox-none"
 
 	include "common.lua"
 
-	includedirs {
-
-		"%{IncludeDir.spdlog}"
-	}
-
 	links {
 
 		"Vulture-None"

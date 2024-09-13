@@ -1,4 +1,4 @@
-include "dependencies.lua"
+include "../dependencies.lua"
 
 workspace "Vulture-Headless"
 	location "../../"

@@ -7,8 +7,15 @@ files {
 
 	"**.lua",
 	"src/*",
-	"src/Vulture/**.h", "src/Vulture/**.cpp", "src/Vulture/**.inl",
+	"src/Vulture/**",
 	"%{wks.location}/%{prj.name}/resources/**"
+}
+
+includedirs {
+
+	"src",
+	"%{IncludeDir.spdlog}",
+	"%{IncludeDir.glm}"
 }
 
 defines "VULTURE_ENGINE"

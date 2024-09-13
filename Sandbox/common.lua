@@ -15,7 +15,9 @@ files {
 includedirs {
 
 	"src",
-	"%{wks.location}/Vulture/src"
+	"%{wks.location}/Vulture/src",
+	"%{IncludeDir.spdlog}",
+	"%{IncludeDir.glm}"
 }
 
 -- Windows
