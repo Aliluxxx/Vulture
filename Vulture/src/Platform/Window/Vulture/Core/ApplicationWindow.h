@@ -13,7 +13,7 @@
 
 namespace ve {
 
-	struct ApplicationCommandLineArgs {
+	struct VULTURE_API ApplicationCommandLineArgs {
 
 		int Count = 0;
 		char** Args = nullptr;
@@ -21,7 +21,7 @@ namespace ve {
 		const char* operator[](int index) const;
 	};
 
-	struct ApplicationSpecification {
+	struct VULTURE_API ApplicationSpecification {
 
 		std::string Name = "Vulture App";
 		std::filesystem::path WorkingDirectory;
