@@ -10,6 +10,7 @@ namespace ve {
 
 		constexpr Time() : m_Microseconds(0) {}
 		constexpr Time(const Int64& micsec) : m_Microseconds(micsec) {}
+		constexpr Time(const float& sec) : m_Microseconds(static_cast<Int64>(sec * 1000000)) {}
 
 		constexpr float AsSeconds() const;
 		constexpr Int32 AsMilliseconds() const;
