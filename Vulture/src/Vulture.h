@@ -22,3 +22,7 @@
 #include "Vulture/Math/Vector2.h"
 #include "Vulture/Math/Vector3.h"
 #include "Vulture/Math/Vector4.h"
+
+// File
+#include "Vulture/Core/FileSystem.h"
+#include "Vulture/Core/FileDialog.h"
