@@ -20,5 +20,4 @@ workspace "Vulture"
 	arch = "%{cfg.architecture}"
 	OS = "%{cfg.system}"
 
-	include "../../Sandbox/build.lua"
-	include "../../Vulture/build.lua"
+	include "../projects.lua"

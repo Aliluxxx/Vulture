@@ -17,6 +17,7 @@ includedirs {
 	"src",
 	"%{wks.location}/Vulture/src",
 	"%{IncludeDir.spdlog}",
+	"%{IncludeDir.nativefiledialog}",
 	"%{IncludeDir.glm}"
 }
 
@@ -41,11 +42,16 @@ filter "system:macosx"
 
 		"VULTURE_PLATFORM_MACOSX"
 	}
-	
+
 -- Static
 filter "configurations:*Static"
 	staticruntime "On"
 	defines "VULTURE_STATIC"
+
+	links {
+
+		"nativefiledialog"
+	}
 
 -- Shared
 filter "configurations:*DLL or *Shared"
@@ -56,6 +62,7 @@ filter "configurations:Debug*"
 	defines "VULTURE_DEBUG"
 	runtime "Debug"
 	symbols "On"
+	optimize "Off"
 
 -- Release
 filter "configurations:Release*"
@@ -68,6 +75,7 @@ filter "configurations:Release*"
 filter "configurations:Dist*"
 	defines "VULTURE_DIST"
 	runtime "Release"
+	symbols "Off"
 	optimize "On"
 
 filter {}

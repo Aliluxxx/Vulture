@@ -32,5 +32,4 @@ workspace "Vulture-None"
 	arch = "%{cfg.architecture}"
 	OS = "%{cfg.system}"
 
-	include "../../Sandbox/build-none.lua"
-	include "../../Vulture/build-none.lua"
+	include "../projects-none.lua"
