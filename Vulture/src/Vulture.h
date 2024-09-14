@@ -8,6 +8,8 @@
 
 // Application
 #include "Vulture/Core/Application.h"
+#include "Vulture/Core/Layer.h"
+#include "Vulture/Core/LayerStack.h"
 
 // Time
 #include "Vulture/Core/Sleep.h"
@@ -29,3 +31,8 @@
 #include "Vulture/Core/InputStream.h"
 #include "Vulture/Core/FileInputStream.h"
 #include "Vulture/Core/MemoryInputStream.h"
+
+// Event codes
+#include "Vulture/Core/KeyCodes.h"
+#include "Vulture/Core/MouseCodes.h"
+#include "Vulture/Core/GamepadCodes.h"
