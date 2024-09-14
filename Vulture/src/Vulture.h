@@ -26,3 +26,6 @@
 // File
 #include "Vulture/Core/FileSystem.h"
 #include "Vulture/Core/FileDialog.h"
+#include "Vulture/Core/InputStream.h"
+#include "Vulture/Core/FileInputStream.h"
+#include "Vulture/Core/MemoryInputStream.h"
