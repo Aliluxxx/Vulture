@@ -20,8 +20,8 @@ namespace ve {
 		void PopOverlay(Ref<Layer> overlay);
 		void Clear();
 
-		std::vector<Ref<Layer>>::iterator Begin() { return m_Layers.begin(); }
-		std::vector<Ref<Layer>>::iterator End() { return m_Layers.end(); }
+		std::vector<Ref<Layer>>::iterator begin() { return m_Layers.begin(); }
+		std::vector<Ref<Layer>>::iterator end() { return m_Layers.end(); }
 
 	private:
 
