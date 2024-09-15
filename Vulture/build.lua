@@ -5,14 +5,8 @@ project "Vulture"
 
 	files {
 
-		"src/Platform/Window/**.h",
-		"src/Platform/Backend/**.h"
-	}
-
-	includedirs {
-
-		"src",
-		"%{IncludeDir.spdlog}"
+		"src/Platform/Window/**",
+		"src/Platform/Backend/**"
 	}
 
 -- Post build commands

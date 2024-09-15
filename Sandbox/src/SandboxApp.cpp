@@ -4,6 +4,8 @@
 #include <Vulture/Core/EntryPoint.h>
 // ---------------------------------
 
+#include "SandboxLayer.h"
+
 class Sandbox : public ve::Application {
 
 public:
@@ -13,13 +15,10 @@ public:
 
 	{
 
-
+		PushLayer(ve::CreateRef<SandboxLayer>());
 	}
 
-	~Sandbox() {
-
-
-	}
+	~Sandbox() {}
 };
 
 ve::Application* ve::CreateApplication(ve::ApplicationCommandLineArgs args) {
@@ -28,6 +27,9 @@ ve::Application* ve::CreateApplication(ve::ApplicationCommandLineArgs args) {
 	spec.Name = "Sandbox";
 	spec.WorkingDirectory = ".";
 	spec.CommandLineArgs = args;
+#ifdef VULTURE_HEADLESS
+	spec.SleepDuration = ve::Milliseconds(1);
+#endif
 
 	return new Sandbox(spec);
 }

@@ -7,8 +7,16 @@ files {
 
 	"**.lua",
 	"src/*",
-	"src/Vulture/**.h", "src/Vulture/**.cpp", "src/Vulture/**.inl",
+	"src/Vulture/**",
 	"%{wks.location}/%{prj.name}/resources/**"
+}
+
+includedirs {
+
+	"src",
+	"%{IncludeDir.spdlog}",
+	"%{IncludeDir.nativefiledialog}",
+	"%{IncludeDir.glm}"
 }
 
 defines "VULTURE_ENGINE"
@@ -46,6 +54,7 @@ filter "configurations:Debug*"
 	defines "VULTURE_DEBUG"
 	runtime "Debug"
 	symbols "On"
+	optimize "Off"
 
 -- Release
 filter "configurations:Release*"
@@ -58,6 +67,7 @@ filter "configurations:Release*"
 filter "configurations:Dist*"
 	defines "VULTURE_DIST"
 	runtime "Release"
+	symbols "Off"
 	optimize "On"
 
 -- Static
@@ -70,6 +80,11 @@ filter "configurations:*Static"
 filter "configurations:*DLL or *Shared"
 	kind "SharedLib"
 	staticruntime "Off"
+
+	links {
+
+		"nativefiledialog"
+	}
 
 filter "configurations:*DLL"
 	defines "VULTURE_BUILD_DLL"

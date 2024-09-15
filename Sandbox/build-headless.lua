@@ -3,11 +3,6 @@ project "Sandbox-Headless"
 
 	include "common.lua"
 
-	includedirs {
-
-		"%{IncludeDir.spdlog}"
-	}
-
 	links {
 
 		"Vulture-Headless"

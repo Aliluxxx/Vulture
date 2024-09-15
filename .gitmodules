@@ -1,3 +1,9 @@
 [submodule "Vulture/libs/spdlog"]
 	path = Vulture/libs/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Vulture/libs/glm"]
+	path = Vulture/libs/glm
+	url = https://github.com/icaven/glm
+[submodule "Vulture/libs/nativefiledialog-extended"]
+	path = Vulture/libs/nativefiledialog-extended
+	url = https://github.com/btzy/nativefiledialog-extended

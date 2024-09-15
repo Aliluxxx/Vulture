@@ -1,4 +1,4 @@
-include "dependencies.lua"
+include "../dependencies.lua"
 
 workspace "Vulture-Headless"
 	location "../../"
@@ -31,5 +31,4 @@ workspace "Vulture-Headless"
 	arch = "%{cfg.architecture}"
 	OS = "%{cfg.system}"
 
-	include "../../Sandbox/build-headless.lua"
-	include "../../Vulture/build-headless.lua"
+	include "../projects-headless.lua"
