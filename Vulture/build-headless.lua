@@ -12,19 +12,25 @@ project "Vulture-Headless"
 	files {
 
 		"src/Platform/Headless/**",
-		"src/Platform/Backend/**"
+
+		"src/Platform/Backend/Vulkan/**"
 	}
 
-	removefiles {
+	filter "system:windows"
+		files {
 
-		"src/Vulture/Renderer/**"
-	}
+			"src/Platform/Backend/DirectX11/**",
+			"src/Platform/Backend/DirectX12/**",
+			"src/Platform/Backend/OpenGL/**"
+		}
 
-	includedirs {
+	filter "system:linux"
 
-		"src",
-		"%{IncludeDir.spdlog}"
-	}
+	filter "system:macosx"
+		files {
+
+			"src/Platform/Backend/Metal/**"
+		}
 
 -- Post build commands
 filter "configurations:*DLL or *Shared"

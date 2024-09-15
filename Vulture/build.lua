@@ -5,9 +5,35 @@ project "Vulture"
 
 	files {
 
-		"src/Platform/Window/**",
-		"src/Platform/Backend/**"
+		"src/Platform/Backend/Vulkan"
 	}
+
+	filter "system:windows"
+		files {
+
+			"src/Platform/Window/Backend/Windows/**",
+
+			"src/Platform/Backend/DirectX11/**",
+			"src/Platform/Backend/DirectX12/**",
+			"src/Platform/Backend/OpenGL/**"
+		}
+
+	filter "system:linux"
+		files {
+
+			--"src/Platform/Window/Backend/Linux/**"
+			"src/Platform/Window/Backend/GLFW/**"
+		}
+
+	filter "system:macosx"
+		files {
+
+			--"src/Platform/Window/Backend/MacOSX/**",
+			"src/Platform/Window/Backend/GLFW/**",
+
+			"src/Platform/Backend/Metal/**"
+		}
+
 
 -- Post build commands
 filter "configurations:*DLL or *Shared"

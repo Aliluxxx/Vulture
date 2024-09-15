@@ -3,6 +3,11 @@ project "Sandbox"
 
 	include "common.lua"
 
+	includedirs {
+
+		"%{wks.location}/Vulture/src/Platform/Window"
+	}
+
 	links {
 
 		"Vulture"
