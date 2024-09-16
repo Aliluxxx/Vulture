@@ -5,13 +5,21 @@ project "Vulture"
 
 	files {
 
+		"src/Platform/Window/*",
+		"src/Platform/Window/Vulture/**",
+
 		"src/Platform/Backend/Vulkan"
+	}
+
+	includedirs {
+
+		"src/Platform/Window"
 	}
 
 	filter "system:windows"
 		files {
 
-			"src/Platform/Window/Backend/Windows/**",
+			"src/Platform/Window/Backend/GLFW/**",
 
 			"src/Platform/Backend/DirectX11/**",
 			"src/Platform/Backend/DirectX12/**",

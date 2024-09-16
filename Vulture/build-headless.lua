@@ -16,6 +16,11 @@ project "Vulture-Headless"
 		"src/Platform/Backend/Vulkan/**"
 	}
 
+	includedirs {
+
+		"src/Platform/Headless"
+	}
+
 	filter "system:windows"
 		files {
 
