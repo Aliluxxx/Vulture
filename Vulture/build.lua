@@ -3,6 +3,11 @@ project "Vulture"
 
 	include "common.lua"
 
+	includedirs {
+
+		"%{IncludeDir.glfw}"
+	}
+
 	files {
 
 		"src/Platform/Window/*",
@@ -49,4 +54,9 @@ filter "configurations:*DLL or *Shared"
 
 		("{MKDIR} ../bin/" .. outputdir .. "/Sandbox"),
 		("{COPYDIR} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+	}
+
+	links {
+
+		"glfw"
 	}

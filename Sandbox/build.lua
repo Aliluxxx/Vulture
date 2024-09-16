@@ -5,6 +5,7 @@ project "Sandbox"
 
 	includedirs {
 
+		"%{IncludeDir.glfw}",
 		"%{wks.location}/Vulture/src/Platform/Window"
 	}
 
@@ -12,3 +13,9 @@ project "Sandbox"
 
 		"Vulture"
 	}
+
+	filter "configurations:*Static"
+		links {
+
+			"glfw"
+		}
