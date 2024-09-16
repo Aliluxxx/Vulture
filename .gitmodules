@@ -7,3 +7,6 @@
 [submodule "Vulture/libs/nativefiledialog-extended"]
 	path = Vulture/libs/nativefiledialog-extended
 	url = https://github.com/btzy/nativefiledialog-extended
+[submodule "Vulture/libs/glfw"]
+	path = Vulture/libs/glfw
+	url = https://github.com/glfw/glfw
