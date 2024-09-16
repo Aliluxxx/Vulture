@@ -13,6 +13,11 @@ namespace ve {
 
 		VE_CORE_ASSERT(!s_Instance, "Application already exists");
 		s_Instance = this;
+
+		WindowProps prop = {};
+		prop.Style = ve::Style::Default;
+		m_Window = Window::Create(prop);
+		m_Window->SetEventCallback(VE_BIND_EVENT_FN(Application::OnEvent));
 	}
 
 	Application::~Application() {
@@ -58,6 +63,8 @@ namespace ve {
 			float time = m_Timer.GetElapsedTime().AsSeconds();
 			Time m_Timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
+
+			m_Window->OnUpdate();
 
 			if (m_Minimized)
 				continue;

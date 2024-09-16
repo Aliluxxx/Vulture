@@ -6,6 +6,7 @@
 #include "Vulture/Core/Base.h"
 #include "Vulture/Core/LayerStack.h"
 #include "Vulture/Events/ApplicationEvent.h"
+#include "Vulture/Core/Window.h"
 #include "Vulture/Core/Timer.h"
 
 #ifdef VULTURE_PLATFORM_WINDOWS
@@ -60,6 +61,7 @@ namespace ve {
 		static Application* s_Instance;
 
 		ApplicationSpecification m_Specification;
+		Ref<Window> m_Window;
 		bool m_Running = true;
 		bool m_Minimized = false;
 		LayerStack m_LayerStack;
