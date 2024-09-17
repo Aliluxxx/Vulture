@@ -31,6 +31,9 @@ namespace ve {
 		virtual void SetEventCallback(const EventCallbackFn& callback) override;
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSync() const override;
+		virtual void SetMouseCursorVisible(bool visible) override;
+		virtual void SetMouseCursorGrabbed(bool grabbed) override;
+		virtual void SetMouseCursorDisabled(bool disable) override;
 
 		virtual void* GetNativeWindow() const override;
 

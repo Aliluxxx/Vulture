@@ -278,6 +278,21 @@ namespace ve {
 		return m_Data.VSync;
 	}
 
+	void GLFWWindow::SetMouseCursorVisible(bool visible) {
+
+		glfwSetInputMode(m_Handle, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
+	}
+
+	void GLFWWindow::SetMouseCursorGrabbed(bool grabbed) {
+
+		glfwSetInputMode(m_Handle, GLFW_CURSOR, grabbed ? GLFW_CURSOR_CAPTURED : GLFW_CURSOR_NORMAL);
+	}
+
+	void GLFWWindow::SetMouseCursorDisabled(bool disable) {
+
+		glfwSetInputMode(m_Handle, GLFW_CURSOR, disable ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+	}
+
 	void* GLFWWindow::GetNativeWindow() const {
 
 		return m_Handle;
