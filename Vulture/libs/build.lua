@@ -3,7 +3,7 @@ include "build-headless.lua"
 project "glfw"
 	location "."
 	kind "StaticLib"
-	staticruntime "On"
+	staticruntime ("" .. sruntime .. "")
 	language "C"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/libs")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/libs")
@@ -79,4 +79,23 @@ project "glfw"
 			"glfw/src/nsgl_context.m"
 		}
 
-	include "common.lua"
+	-- Debug
+	filter "configurations:Debug*"
+		runtime "Debug"
+		symbols "On"
+		optimize "Off"
+		targetsuffix "-d"
+
+	-- Release
+	filter "configurations:Release*"
+		runtime "Release"
+		symbols "On"
+		optimize "On"
+		targetsuffix "-r"
+
+	-- Dist
+	filter "configurations:Dist*"
+		runtime "Release"
+		symbols "Off"
+		optimize "On"
+		targetsuffix ""

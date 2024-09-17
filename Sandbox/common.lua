@@ -1,4 +1,5 @@
 kind "ConsoleApp"
+staticruntime ("" .. sruntime .. "")
 language "C++"
 cppdialect "C++20"
 targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
@@ -45,7 +46,6 @@ filter "system:macosx"
 
 -- Static
 filter "configurations:*Static"
-	staticruntime "On"
 	defines "VULTURE_STATIC"
 
 	links {
@@ -55,7 +55,6 @@ filter "configurations:*Static"
 
 -- Shared
 filter "configurations:*DLL or *Shared"
-	staticruntime "Off"
 
 -- Debug
 filter "configurations:Debug*"
