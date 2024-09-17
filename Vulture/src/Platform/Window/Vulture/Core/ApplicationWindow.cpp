@@ -14,9 +14,7 @@ namespace ve {
 		VE_CORE_ASSERT(!s_Instance, "Application already exists");
 		s_Instance = this;
 
-		WindowProps prop = {};
-		prop.Style = ve::Style::Default;
-		m_Window = Window::Create(prop);
+		m_Window = Window::Create();
 		m_Window->SetEventCallback(VE_BIND_EVENT_FN(Application::OnEvent));
 	}
 
@@ -41,19 +39,19 @@ namespace ve {
 
 	void Application::PushLayer(Ref<Layer> layer) {
 
-		m_LayerStack.PushLayer(layer);
+		s_Instance->m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Ref<Layer> overlay) {
 
-		m_LayerStack.PushOverlay(overlay);
+		s_Instance->m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 
 	void Application::Close() {
 
-		m_Running = false;
+		s_Instance->m_Running = false;
 	}
 
 	void Application::Run() {

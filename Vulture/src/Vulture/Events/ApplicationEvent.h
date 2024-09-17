@@ -6,7 +6,7 @@
 
 namespace ve {
 
-	class VULTURE_API WindowResizeEvent : public Event {
+	class WindowResizeEvent : public Event {
 
 	public:
 
@@ -33,7 +33,7 @@ namespace ve {
 		unsigned int m_Width, m_Height;
 	};
 
-	class VULTURE_API WindowCloseEvent : public Event {
+	class WindowCloseEvent : public Event {
 
 	public:
 
@@ -43,7 +43,7 @@ namespace ve {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class VULTURE_API WindowFocusEvent : public Event {
+	class WindowFocusEvent : public Event {
 
 	public:
 
@@ -53,16 +53,26 @@ namespace ve {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class VULTURE_API WindowMovedEvent : public Event {
+	class WindowLostFocusEvent : public Event {
 
 	public:
 
-		WindowMovedEvent(unsigned int x, unsigned int y)
+		WindowLostFocusEvent() {}
+
+		EVENT_CLASS_TYPE(WindowLostFocus)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
+
+	class WindowMovedEvent : public Event {
+
+	public:
+
+		WindowMovedEvent(int x, int y)
 			: m_X(x), m_Y(y)
 		{}
 
-		inline unsigned int GetX() const { return m_X; }
-		inline unsigned int GetY() const { return m_Y; }
+		inline int GetX() const { return m_X; }
+		inline int GetY() const { return m_Y; }
 
 		std::string ToString() const override {
 
@@ -77,10 +87,10 @@ namespace ve {
 
 	private:
 
-		unsigned int m_X, m_Y;
+		int m_X, m_Y;
 	};
 
-	class VULTURE_API AppTickEvent : public Event {
+	class AppTickEvent : public Event {
 
 	public:
 
@@ -90,7 +100,7 @@ namespace ve {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class VULTURE_API AppUpdateEvent : public Event {
+	class AppUpdateEvent : public Event {
 
 	public:
 
@@ -100,7 +110,7 @@ namespace ve {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class VULTURE_API AppRenderEvent : public Event {
+	class AppRenderEvent : public Event {
 
 	public:
 

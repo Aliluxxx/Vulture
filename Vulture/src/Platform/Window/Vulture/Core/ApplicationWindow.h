@@ -41,14 +41,19 @@ namespace ve {
 
 		void OnEvent(Event& e);
 
-		void PushLayer(Ref<Layer> layer);
-		void PushOverlay(Ref<Layer> overlay);
+		static void PushLayer(Ref<Layer> layer);
+		static void PushOverlay(Ref<Layer> overlay);
 
-		void Close();
+		static void Close();
 
-		inline const ApplicationSpecification& GetSpecification() const {
+		inline static const Ref<Window> GetWindow() {
 
-			return m_Specification;
+			return s_Instance->m_Window;
+		}
+
+		inline static const ApplicationSpecification& GetSpecification() {
+
+			return s_Instance->m_Specification;
 		}
 
 	private:

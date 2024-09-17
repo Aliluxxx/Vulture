@@ -6,7 +6,7 @@
 
 namespace ve {
 
-	class VULTURE_API MouseMovedEvent : public Event {
+	class MouseMovedEvent : public Event {
 
 	public:
 
@@ -33,7 +33,7 @@ namespace ve {
 		float m_MouseX, m_MouseY;
 	};
 
-	class VULTURE_API MouseScrolledEvent : public Event {
+	class MouseScrolledEvent : public Event {
 
 	public:
 
@@ -60,7 +60,7 @@ namespace ve {
 		float m_XOffset, m_YOffset;
 	};
 
-	class VULTURE_API MouseButtonEvent : public Event {
+	class MouseButtonEvent : public Event {
 
 	public:
 
@@ -77,7 +77,7 @@ namespace ve {
 		int m_Button;
 	};
 
-	class VULTURE_API MouseButtonPressedEvent : public MouseButtonEvent {
+	class MouseButtonPressedEvent : public MouseButtonEvent {
 
 	public:
 
@@ -96,7 +96,7 @@ namespace ve {
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class VULTURE_API MouseButtonReleasedEvent : public MouseButtonEvent {
+	class MouseButtonReleasedEvent : public MouseButtonEvent {
 
 	public:
 

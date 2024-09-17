@@ -32,7 +32,13 @@
 #include "Vulture/Core/FileInputStream.h"
 #include "Vulture/Core/MemoryInputStream.h"
 
+// Input
+#include "Vulture/Core/Input.h"
+
 // Event codes
+#include "Vulture/Events/ApplicationEvent.h"
+#include "Vulture/Events/KeyEvent.h"
+#include "Vulture/Events/MouseEvent.h"
 #include "Vulture/Core/KeyCodes.h"
 #include "Vulture/Core/MouseCodes.h"
 #include "Vulture/Core/GamepadCodes.h"
