@@ -14,11 +14,11 @@ namespace ve {
 
 			Titlebar = BIT(0),
 			Resize = BIT(1),
-			Close = BIT(2)
+			Fullscreen = BIT(2)
 		};
 
 		const WindowStyle None = 0;
-		const WindowStyle Default = Titlebar | Resize | Close;
+		const WindowStyle Default = Titlebar | Resize;
 	}
 
 	struct VULTURE_API WindowProps {
