@@ -4,11 +4,12 @@
 
 namespace ve {
 
-	using GamepadCode = Uint16;
+	using GamepadButtonCode = Uint16;
+	using GamepadAxisCode = Uint16;
 
 	namespace Gamepad {
 
-		enum : GamepadCode {
+		enum : GamepadButtonCode {
 
 			// From glfw3.h
 			ButtonA = 0,
@@ -31,12 +32,15 @@ namespace ve {
 			ButtonCircle = ButtonB,
 			ButtonSquare = ButtonX,
 			ButtonTriangle = ButtonY,
-			AxisLeftX = 0,
-			AxisLeftY = 1,
-			AxisRightX = 2,
-			AxisRightY = 3,
 			AxisLeftTrigger = 4,
 			AxisRightTrigger = 5
+		};
+
+		enum : GamepadAxisCode {
+
+			// From glfw3.h
+			AxisLeft = 0,
+			AxisRight = 2
 		};
 	}
 }
