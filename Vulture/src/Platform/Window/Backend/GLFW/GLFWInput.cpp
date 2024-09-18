@@ -4,25 +4,27 @@
 
 #include "Vulture/Core/ApplicationWindow.h"
 
-#include "Vulture/Core/Input.h"
+#include "GLFWInput.h"
 
 namespace ve {
 
-	bool Input::IsKeyPressed(KeyCode keycode) {
+	Scope<Input> Input::s_Instance = CreateScope<GLFWInput>();
+
+	bool GLFWInput::IsKeyPressedImpl(KeyCode keycode) {
 
 		auto window = static_cast<GLFWwindow*>(Application::GetWindow()->GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool Input::IsMouseButtonPressed(MouseCode button) {
+	bool GLFWInput::IsMouseButtonPressedImpl(MouseCode button) {
 
 		auto window = static_cast<GLFWwindow*>(Application::GetWindow()->GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
 		return state == GLFW_PRESS;
 	}
 
-	ve::Vector2i Input::GetMousePosition() {
+	ve::Vector2i GLFWInput::GetMousePositionImpl() {
 
 		auto window = static_cast<GLFWwindow*>(Application::GetWindow()->GetNativeWindow());
 		double xpos, ypos;
@@ -30,7 +32,7 @@ namespace ve {
 		return { (float)xpos, (float)ypos };
 	}
 
-	float Input::GetMouseX() {
+	float GLFWInput::GetMouseXImpl() {
 
 		auto window = static_cast<GLFWwindow*>(Application::GetWindow()->GetNativeWindow());
 		double xpos, ypos;
@@ -38,7 +40,7 @@ namespace ve {
 		return (float)xpos;
 	}
 
-	float Input::GetMouseY() {
+	float GLFWInput::GetMouseYImpl() {
 
 		auto window = static_cast<GLFWwindow*>(Application::GetWindow()->GetNativeWindow());
 		double xpos, ypos;

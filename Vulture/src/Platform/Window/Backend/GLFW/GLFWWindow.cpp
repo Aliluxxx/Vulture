@@ -5,12 +5,16 @@
 #include "Vulture/Events/ApplicationEvent.h"
 #include "Vulture/Events/KeyEvent.h"
 #include "Vulture/Events/MouseEvent.h"
+#include "Vulture/Events/GamepadEvent.h"
+#include "GLFWGamepadInput.h"
 
 #include "GLFWWindow.h"
 
 namespace ve {
 
 	static int g_glfwInit = 0;
+	static std::atomic<int> g_gamepadConnected = -1;
+	static std::atomic<int> g_gamepadDisconnected = -1;
 
 	static void GLFWErrorCallback(int error, const char* msg) {
 
@@ -58,6 +62,144 @@ namespace ve {
 		int x, y, width, height;
 		glfwGetMonitorWorkarea(glfwGetPrimaryMonitor(), &x, &y, &width, &height);
 		glfwSetWindowPos(m_Handle, width / 2 - prop.Width / 2, height / 2 - prop.Height / 2);
+	}
+
+	GLFWWindow::~GLFWWindow() {
+
+		// Destroy the window
+		glfwDestroyWindow(m_Handle);
+
+		// Terminate GLFW
+		if (g_glfwInit == 0)
+			glfwTerminate();
+		else
+			g_glfwInit--;
+	}
+
+	void GLFWWindow::OnUpdate() {
+
+		glfwPollEvents();
+
+		if (g_gamepadConnected != -1) {
+
+			GLFWGamepadInput::AddGamepad(GLFW_JOYSTICK_1 + g_gamepadConnected);
+			GamepadConnectedEvent event(GLFW_JOYSTICK_1 + g_gamepadConnected);
+			m_Data.EventCallback(event);
+			g_gamepadConnected = -1;
+		}
+
+		if (g_gamepadDisconnected != -1) {
+
+			GLFWGamepadInput::RemoveGamepad(GLFW_JOYSTICK_1 + g_gamepadDisconnected);
+			GamepadDisconnectedEvent event(GLFW_JOYSTICK_1 + g_gamepadDisconnected);
+			m_Data.EventCallback(event);
+			g_gamepadDisconnected = -1;
+		}
+	}
+
+	std::string GLFWWindow::GetTitle() const {
+
+		return std::string(glfwGetWindowTitle(m_Handle));
+	}
+
+	void GLFWWindow::SetTitle(const std::string& title) {
+
+		glfwSetWindowTitle(m_Handle, title.c_str());
+	}
+
+	Uint32 GLFWWindow::GetWidth() const {
+
+		int width, height;
+		glfwGetWindowSize(m_Handle, &width, &height);
+		return width;
+	}
+
+	void GLFWWindow::SetWidth(Uint32 width) {
+
+		int oldWidth, oldHeight;
+		glfwGetWindowSize(m_Handle, &oldWidth, &oldHeight);
+		glfwSetWindowSize(m_Handle, width, oldHeight);
+	}
+
+	Uint32 GLFWWindow::GetHeight() const {
+
+		int width, height;
+		glfwGetWindowSize(m_Handle, &width, &height);
+		return height;
+	}
+
+	void GLFWWindow::SetHeight(Uint32 height) {
+
+		int oldWidth, oldHeight;
+		glfwGetWindowSize(m_Handle, &oldWidth, &oldHeight);
+		glfwSetWindowSize(m_Handle, oldWidth, height);
+	}
+
+	Int32 GLFWWindow::GetX() const {
+
+		int x, y;
+		glfwGetWindowPos(m_Handle, &x, &y);
+		return x;
+	}
+
+	void GLFWWindow::SetX(Int32 x) {
+
+		int oldX, oldY;
+		glfwGetWindowPos(m_Handle, &oldX, &oldY);
+		glfwSetWindowPos(m_Handle, x, oldY);
+	}
+
+	Int32 GLFWWindow::GetY() const {
+
+		int x, y;
+		glfwGetWindowPos(m_Handle, &x, &y);
+		return y;
+	}
+
+	void GLFWWindow::SetY(Int32 y) {
+
+		int oldX, oldY;
+		glfwGetWindowPos(m_Handle, &oldX, &oldY);
+		glfwSetWindowPos(m_Handle, oldX, y);
+	}
+
+	void GLFWWindow::SetEventCallback(const EventCallbackFn& callback) {
+
+		m_Data.EventCallback = callback;
+		InitCallbacks();
+	}
+
+	void GLFWWindow::SetVSync(bool enabled) {
+
+		m_Data.VSync = enabled;
+	}
+
+	bool GLFWWindow::IsVSync() const {
+
+		return m_Data.VSync;
+	}
+
+	void GLFWWindow::SetMouseCursorVisible(bool visible) {
+
+		glfwSetInputMode(m_Handle, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
+	}
+
+	void GLFWWindow::SetMouseCursorGrabbed(bool grabbed) {
+
+		glfwSetInputMode(m_Handle, GLFW_CURSOR, grabbed ? GLFW_CURSOR_CAPTURED : GLFW_CURSOR_NORMAL);
+	}
+
+	void GLFWWindow::SetMouseCursorDisabled(bool disable) {
+
+		glfwSetInputMode(m_Handle, GLFW_CURSOR, disable ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+	}
+
+	void* GLFWWindow::GetNativeWindow() const {
+
+		return m_Handle;
+	}
+
+	void GLFWWindow::InitCallbacks() {
 
 		// Set callbacks
 
@@ -178,123 +320,23 @@ namespace ve {
 				data.EventCallback(event);
 			}
 		});
-	}
 
-	GLFWWindow::~GLFWWindow() {
+		glfwSetJoystickCallback([](int jid, int event) {
 
-		// Destroy the window
-		glfwDestroyWindow(m_Handle);
+			switch (event) {
 
-		// Terminate GLFW
-		if (g_glfwInit == 0)
-			glfwTerminate();
-		else
-			g_glfwInit--;
-	}
+				case GLFW_CONNECTED: {
+					if (glfwJoystickIsGamepad(jid) != GLFW_TRUE)
+						return;
+					g_gamepadConnected = jid;
+					break;
+				}
 
-	void GLFWWindow::OnUpdate() {
-
-		glfwPollEvents();
-	}
-
-	std::string GLFWWindow::GetTitle() const {
-
-		return std::string(glfwGetWindowTitle(m_Handle));
-	}
-
-	void GLFWWindow::SetTitle(const std::string& title) {
-
-		glfwSetWindowTitle(m_Handle, title.c_str());
-	}
-
-	Uint32 GLFWWindow::GetWidth() const {
-
-		int width, height;
-		glfwGetWindowSize(m_Handle, &width, &height);
-		return width;
-	}
-
-	void GLFWWindow::SetWidth(Uint32 width) {
-
-		int oldWidth, oldHeight;
-		glfwGetWindowSize(m_Handle, &oldWidth, &oldHeight);
-		glfwSetWindowSize(m_Handle, width, oldHeight);
-	}
-
-	Uint32 GLFWWindow::GetHeight() const {
-
-		int width, height;
-		glfwGetWindowSize(m_Handle, &width, &height);
-		return height;
-	}
-
-	void GLFWWindow::SetHeight(Uint32 height) {
-
-		int oldWidth, oldHeight;
-		glfwGetWindowSize(m_Handle, &oldWidth, &oldHeight);
-		glfwSetWindowSize(m_Handle, oldWidth, height);
-	}
-
-	Int32 GLFWWindow::GetX() const {
-
-		int x, y;
-		glfwGetWindowPos(m_Handle, &x, &y);
-		return x;
-	}
-
-	void GLFWWindow::SetX(Int32 x) {
-
-		int oldX, oldY;
-		glfwGetWindowPos(m_Handle, &oldX, &oldY);
-		glfwSetWindowPos(m_Handle, x, oldY);
-	}
-
-	Int32 GLFWWindow::GetY() const {
-
-		int x, y;
-		glfwGetWindowPos(m_Handle, &x, &y);
-		return y;
-	}
-
-	void GLFWWindow::SetY(Int32 y) {
-
-		int oldX, oldY;
-		glfwGetWindowPos(m_Handle, &oldX, &oldY);
-		glfwSetWindowPos(m_Handle, oldX, y);
-	}
-
-	void GLFWWindow::SetEventCallback(const EventCallbackFn& callback) {
-
-		m_Data.EventCallback = callback;
-	}
-
-	void GLFWWindow::SetVSync(bool enabled) {
-
-		m_Data.VSync = enabled;
-	}
-
-	bool GLFWWindow::IsVSync() const {
-
-		return m_Data.VSync;
-	}
-
-	void GLFWWindow::SetMouseCursorVisible(bool visible) {
-
-		glfwSetInputMode(m_Handle, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
-	}
-
-	void GLFWWindow::SetMouseCursorGrabbed(bool grabbed) {
-
-		glfwSetInputMode(m_Handle, GLFW_CURSOR, grabbed ? GLFW_CURSOR_CAPTURED : GLFW_CURSOR_NORMAL);
-	}
-
-	void GLFWWindow::SetMouseCursorDisabled(bool disable) {
-
-		glfwSetInputMode(m_Handle, GLFW_CURSOR, disable ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
-	}
-
-	void* GLFWWindow::GetNativeWindow() const {
-
-		return m_Handle;
+				case GLFW_DISCONNECTED: {
+					g_gamepadDisconnected = jid;
+					break;
+				}
+			}
+		});
 	}
 }

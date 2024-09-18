@@ -39,6 +39,8 @@ namespace ve {
 
 	private:
 
+		void InitCallbacks();
+
 		GLFWwindow* m_Handle;
 
 		struct WindowData {
