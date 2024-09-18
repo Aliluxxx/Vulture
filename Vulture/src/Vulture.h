@@ -39,6 +39,8 @@
 #include "Vulture/Events/ApplicationEvent.h"
 #include "Vulture/Events/KeyEvent.h"
 #include "Vulture/Events/MouseEvent.h"
+#include "Vulture/Events/GamepadEvent.h"
 #include "Vulture/Core/KeyCodes.h"
 #include "Vulture/Core/MouseCodes.h"
 #include "Vulture/Core/GamepadCodes.h"
+#include "Vulture/Core/GamepadInput.h"
