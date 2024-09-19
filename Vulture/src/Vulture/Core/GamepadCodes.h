@@ -31,16 +31,16 @@ namespace ve {
 			ButtonCross = ButtonA,
 			ButtonCircle = ButtonB,
 			ButtonSquare = ButtonX,
-			ButtonTriangle = ButtonY,
-			AxisLeftTrigger = 4,
-			AxisRightTrigger = 5
+			ButtonTriangle = ButtonY
 		};
 
 		enum : GamepadAxisCode {
 
 			// From glfw3.h
 			AxisLeft = 0,
-			AxisRight = 2
+			AxisRight = 2,
+			AxisLeftTrigger = 4,
+			AxisRightTrigger = 5
 		};
 	}
 }
