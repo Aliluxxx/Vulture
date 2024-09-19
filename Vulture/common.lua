@@ -1,3 +1,4 @@
+staticruntime ("" .. sruntime .. "")
 language "C++"
 cppdialect "C++20"
 targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
@@ -73,13 +74,11 @@ filter "configurations:Dist*"
 -- Static
 filter "configurations:*Static"
 	kind "StaticLib"
-	staticruntime "On"
 	defines "VULTURE_STATIC"
 
 -- Shared
 filter "configurations:*DLL or *Shared"
 	kind "SharedLib"
-	staticruntime "Off"
 
 	links {
 

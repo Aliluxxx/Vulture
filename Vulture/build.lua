@@ -3,11 +3,50 @@ project "Vulture"
 
 	include "common.lua"
 
+	includedirs {
+
+		"%{IncludeDir.glfw}"
+	}
+
 	files {
 
-		"src/Platform/Window/**",
-		"src/Platform/Backend/**"
+		"src/Platform/Window/*",
+		"src/Platform/Window/Vulture/**",
+
+		"src/Platform/Backend/Vulkan"
 	}
+
+	includedirs {
+
+		"src/Platform/Window"
+	}
+
+	filter "system:windows"
+		files {
+
+			"src/Platform/Window/Backend/GLFW/**",
+
+			"src/Platform/Backend/DirectX11/**",
+			"src/Platform/Backend/DirectX12/**",
+			"src/Platform/Backend/OpenGL/**"
+		}
+
+	filter "system:linux"
+		files {
+
+			--"src/Platform/Window/Backend/Linux/**"
+			"src/Platform/Window/Backend/GLFW/**"
+		}
+
+	filter "system:macosx"
+		files {
+
+			--"src/Platform/Window/Backend/MacOSX/**",
+			"src/Platform/Window/Backend/GLFW/**",
+
+			"src/Platform/Backend/Metal/**"
+		}
+
 
 -- Post build commands
 filter "configurations:*DLL or *Shared"
@@ -15,4 +54,9 @@ filter "configurations:*DLL or *Shared"
 
 		("{MKDIR} ../bin/" .. outputdir .. "/Sandbox"),
 		("{COPYDIR} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+	}
+
+	links {
+
+		"glfw"
 	}

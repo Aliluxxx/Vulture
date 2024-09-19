@@ -7,13 +7,13 @@
 
 namespace ve {
 
-	struct VULTURE_API FileDialogFilter {
+	struct FileDialogFilter {
 
 		std::string Name;
 		std::string Ext;
 	};
 
-	struct VULTURE_API FileDialogSpecification {
+	struct FileDialogSpecification {
 
 		std::vector<FileDialogFilter> FilterList;
 		std::filesystem::path DefaultFile;

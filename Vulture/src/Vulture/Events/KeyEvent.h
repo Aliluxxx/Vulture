@@ -6,7 +6,7 @@
 
 namespace ve {
 
-	class VULTURE_API KeyEvent : public Event {
+	class KeyEvent : public Event {
 
 	public:
 
@@ -23,7 +23,7 @@ namespace ve {
 		int m_KeyCode;
 	};
 
-	class VULTURE_API KeyPressedEvent : public KeyEvent {
+	class KeyPressedEvent : public KeyEvent {
 
 	public:
 
@@ -46,7 +46,7 @@ namespace ve {
 		int m_RepeatCount;
 	};
 
-	class VULTURE_API KeyReleasedEvent : public KeyEvent {
+	class KeyReleasedEvent : public KeyEvent {
 
 	public:
 
@@ -65,7 +65,7 @@ namespace ve {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class VULTURE_API KeyTypedEvent : public KeyEvent {
+	class KeyTypedEvent : public KeyEvent {
 
 	public:
 

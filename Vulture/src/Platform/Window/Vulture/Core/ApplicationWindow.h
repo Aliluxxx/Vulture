@@ -6,6 +6,7 @@
 #include "Vulture/Core/Base.h"
 #include "Vulture/Core/LayerStack.h"
 #include "Vulture/Events/ApplicationEvent.h"
+#include "Vulture/Core/Window.h"
 #include "Vulture/Core/Timer.h"
 
 #ifdef VULTURE_PLATFORM_WINDOWS
@@ -40,14 +41,19 @@ namespace ve {
 
 		void OnEvent(Event& e);
 
-		void PushLayer(Ref<Layer> layer);
-		void PushOverlay(Ref<Layer> overlay);
+		static void PushLayer(Ref<Layer> layer);
+		static void PushOverlay(Ref<Layer> overlay);
 
-		void Close();
+		static void Close();
 
-		inline const ApplicationSpecification& GetSpecification() const {
+		inline static const Ref<Window> GetWindow() {
 
-			return m_Specification;
+			return s_Instance->m_Window;
+		}
+
+		inline static const ApplicationSpecification& GetSpecification() {
+
+			return s_Instance->m_Specification;
 		}
 
 	private:
@@ -60,6 +66,7 @@ namespace ve {
 		static Application* s_Instance;
 
 		ApplicationSpecification m_Specification;
+		Ref<Window> m_Window;
 		bool m_Running = true;
 		bool m_Minimized = false;
 		LayerStack m_LayerStack;

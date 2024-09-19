@@ -13,6 +13,9 @@ namespace ve {
 
 		VE_CORE_ASSERT(!s_Instance, "Application already exists");
 		s_Instance = this;
+
+		m_Window = Window::Create();
+		m_Window->SetEventCallback(VE_BIND_EVENT_FN(Application::OnEvent));
 	}
 
 	Application::~Application() {
@@ -36,19 +39,19 @@ namespace ve {
 
 	void Application::PushLayer(Ref<Layer> layer) {
 
-		m_LayerStack.PushLayer(layer);
+		s_Instance->m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Ref<Layer> overlay) {
 
-		m_LayerStack.PushOverlay(overlay);
+		s_Instance->m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 
 	void Application::Close() {
 
-		m_Running = false;
+		s_Instance->m_Running = false;
 	}
 
 	void Application::Run() {
@@ -58,6 +61,8 @@ namespace ve {
 			float time = m_Timer.GetElapsedTime().AsSeconds();
 			Time m_Timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
+
+			m_Window->OnUpdate();
 
 			if (m_Minimized)
 				continue;

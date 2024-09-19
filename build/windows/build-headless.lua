@@ -3,11 +3,6 @@ include "../dependencies.lua"
 workspace "Vulture-Headless"
 	location "../../"
 
-	defines {
-
-		"VULTURE_HEADLESS"
-	}
-
 	printf("OS: Windows")
 	system "windows"
 	configurations { "Debug-Static", "Release-Static", "Dist-Static", "Debug-DLL", "Release-DLL", "Dist-DLL" }
@@ -23,12 +18,5 @@ workspace "Vulture-Headless"
 
 	filter {}
 
-	flags { "MultiProcessorCompile" }
-	startproject "Sandbox-Headless"
-
-	outputdir = "%{cfg.buildcfg}-%{cfg.platform}"
-	config = "%{cfg.buildcfg}"
-	arch = "%{cfg.architecture}"
-	OS = "%{cfg.system}"
-
+	include "../settings-headless.lua"
 	include "../projects-headless.lua"

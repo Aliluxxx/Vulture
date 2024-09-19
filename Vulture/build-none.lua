@@ -3,12 +3,6 @@ project "Vulture-None"
 
 	include "common.lua"
 
-	defines {
-
-		"VULTURE_HEADLESS",
-		"VULTURE_NONE"
-	}
-
 	files {
 
 		"src/Platform/Headless/**"

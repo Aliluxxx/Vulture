@@ -1,6 +1,7 @@
 #include "vepch.h"
 
 #include "Vulture/Core/Sleep.h"
+#include "Vulture/Events/ApplicationEvent.h"
 
 #include "ApplicationHeadless.h"
 
@@ -38,19 +39,19 @@ namespace ve {
 
 	void Application::PushLayer(Ref<Layer> layer) {
 
-		m_LayerStack.PushLayer(layer);
+		s_Instance->m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Ref<Layer> overlay) {
 
-		m_LayerStack.PushOverlay(overlay);
+		s_Instance->m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 
 	void Application::Close() {
 
-		m_Running = false;
+		s_Instance->m_Running = false;
 	}
 
 	void Application::Run() {
@@ -60,6 +61,9 @@ namespace ve {
 			float time = m_Timer.GetElapsedTime().AsSeconds();
 			Time m_Timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
+
+			AppTickEvent e;
+			OnEvent(e);
 
 			for (Ref<Layer> layer : m_LayerStack)
 				layer->OnUpdate(m_Timestep);

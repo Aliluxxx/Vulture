@@ -12,12 +12,5 @@ workspace "Vulture"
 
 	filter {}
 
-	flags { "MultiProcessorCompile" }
-	startproject "Sandbox"
-
-	outputdir = "%{cfg.buildcfg}-%{cfg.platform}"
-	config = "%{cfg.buildcfg}"
-	arch = "%{cfg.architecture}"
-	OS = "%{cfg.system}"
-
+	include "../settings.lua"
 	include "../projects.lua"

@@ -3,28 +3,33 @@ project "Vulture-Headless"
 
 	include "common.lua"
 
-	defines {
-
-		"VULTURE_HEADLESS",
-		"VULTURE_NONE"
-	}
-
 	files {
 
 		"src/Platform/Headless/**",
-		"src/Platform/Backend/**"
-	}
 
-	removefiles {
-
-		"src/Vulture/Renderer/**"
+		"src/Platform/Backend/Vulkan/**"
 	}
 
 	includedirs {
 
-		"src",
-		"%{IncludeDir.spdlog}"
+		"src/Platform/Headless"
 	}
+
+	filter "system:windows"
+		files {
+
+			"src/Platform/Backend/DirectX11/**",
+			"src/Platform/Backend/DirectX12/**",
+			"src/Platform/Backend/OpenGL/**"
+		}
+
+	filter "system:linux"
+
+	filter "system:macosx"
+		files {
+
+			"src/Platform/Backend/Metal/**"
+		}
 
 -- Post build commands
 filter "configurations:*DLL or *Shared"

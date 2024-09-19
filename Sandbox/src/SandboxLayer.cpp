@@ -12,7 +12,7 @@ void SandboxLayer::OnDetach() {
 
 void SandboxLayer::OnUpdate(ve::Time ts) {
 
-	VE_TRACE("{}", 1.0f / ts.AsSeconds());
+
 }
 
 void SandboxLayer::OnImGuiRender() {
@@ -24,5 +24,18 @@ void SandboxLayer::OnImGuiRender() {
 
 void SandboxLayer::OnEvent(ve::Event& event) {
 
+	ve::EventDispatcher dispatcher(event);
+	dispatcher.Dispatch<ve::KeyPressedEvent>([](ve::KeyPressedEvent& event) {
 
+		switch (event.GetKeyCode()) {
+
+			case ve::Key::Escape:
+				ve::Application::Close();
+				break;
+		}
+
+		return false;
+	});
+
+	VE_TRACE("{0}", event.ToString());
 }

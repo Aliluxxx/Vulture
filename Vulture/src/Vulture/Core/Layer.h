@@ -19,14 +19,17 @@ namespace ve {
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
+#ifndef VULTURE_DIST
 		inline const std::string& GetName() const {
 
-#ifdef VULTURE_DIST
-			return "";
-#else
 			return m_DebugName;
-#endif
 		}
+#else
+		inline std::string GetName() const {
+
+			return "";
+		}
+#endif
 
 	protected:
 

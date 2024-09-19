@@ -28,11 +28,12 @@ namespace ve {
 		}
 
 		else if (result == NFD_CANCEL)
-			return "";
+			path = std::filesystem::path("");
 
 		else
 			VE_CORE_ASSERT(false, NFD_GetError());
 
+		delete[] filters;
 		NFD_Quit();
 
 		return path;
@@ -61,11 +62,12 @@ namespace ve {
 		}
 
 		else if (result == NFD_CANCEL)
-			return "";
+			path = std::filesystem::path("");
 
 		else
 			VE_CORE_ASSERT(false, NFD_GetError());
 
+		delete[] filters;
 		NFD_Quit();
 
 		return path;
@@ -89,7 +91,7 @@ namespace ve {
 		}
 
 		else if (result == NFD_CANCEL)
-			return "";
+			path = std::filesystem::path("");
 
 		else
 			VE_CORE_ASSERT(false, NFD_GetError());
@@ -101,11 +103,14 @@ namespace ve {
 
 	void* FileDialog::CreateFilters(const std::vector<FileDialogFilter>& filters) {
 
+		if (filters.empty())
+			return nullptr;
+
 		nfdfilteritem_t* filter = new nfdfilteritem_t[filters.size()];
 		for (std::size_t i = 0; i < filters.size(); i++) {
 
 			auto& f = filters[i];
-			filter[i].name = f.Name.c_str();
+			filter[i].name = (nfdu8char_t*)f.Name.c_str();
 			filter[i].spec = f.Ext.c_str();
 		}
 
