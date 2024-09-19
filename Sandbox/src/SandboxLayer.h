@@ -9,10 +9,7 @@ public:
 	SandboxLayer()
 		: ve::Layer("Sandbox")
 
-	{
-
-
-	}
+	{}
 
 	virtual ~SandboxLayer() = default;
 
